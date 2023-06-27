@@ -1,38 +1,147 @@
-.App {
+.app {
+  margin: 100px auto;
   text-align: center;
+  width: fit-content;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #222;
+  font-family: consolas;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.app h1 {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.board {
+  width: fit-content;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-@keyframes App-logo-spin {
+.square {
+  height: 100px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.square div {
+  border: 3px solid transparent;
+  border-radius: 50%;
+  display: block;
+  height: 70%;
+  position: relative;
+  width: 70%;
+}
+
+.square div.X:before,
+.square div.X:after {
+  background: #62fffc;
+  border-radius: 5px;
+  content: "";
+  position: absolute;
+  height: 8px;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  animation-name: X_animation;
+  animation-duration: 300ms;
+}
+
+.square div.X:before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.square div.X:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.square div.O {
+  border-color: #ffa02e;
+  border-width: 7px;
+  animation-name: O_animation;
+  animation-duration: 300ms;
+}
+
+.app .new-game {
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  margin: 25px;
+  padding: 8px 12px;
+  transition: 0.3s;
+  width: 100px;
+}
+
+.app .new-game:hover {
+  background-color: white;
+  color: #222;
+}
+
+@keyframes X_animation {
   from {
-    transform: rotate(0deg);
+    width: 0%;
   }
   to {
-    transform: rotate(360deg);
+    width: 150%;
   }
+}
+
+@keyframes O_animation {
+  from {
+    height: 0%;
+    width: 0%;
+  }
+  to {
+    height: 70%;
+    width: 70%;
+  }
+}
+
+.popup-result {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: grid;
+  height: 100vh;
+  left: 0;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.result {
+  align-items: center;
+  background: #111;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 300px;
+  justify-content: center;
+  max-width: 400px;
+  width: 70%;
+}
+
+.status {
+  color: white;
+  padding-top: 20px;
+  font-size: 2em;
+}
+
+.popup-result h2 {
+  color: white;
+  font-size: 2em;
+}
+
+.winner .square {
+  cursor: default;
 }
